@@ -10,15 +10,16 @@ export class ProductPage {
     readonly productImage: Locator;
     readonly thumbnailCarousel: Locator;
     readonly productDescription: Locator;
-    readonly addToCartButton: Locator;
+    readonly downloadForFreeButton: Locator;
     readonly favoriteButton: Locator;
+    readonly followButton: Locator;
+    readonly loginPopup: Locator;
     readonly cartCounter: Locator;
     readonly checkoutButton: Locator;
     readonly reviewsSection: Locator;
-    readonly socialShareButtons: Locator;
+    readonly pinterestButton: Locator;
     readonly breadcrumbNavigation: Locator;
     readonly thumbnails: Locator;
-    readonly skuOrProductId: Locator;
     readonly downloadDetails: Locator;
     readonly cartPopup: Locator;
     readonly removeFromCartButton: Locator;
@@ -39,23 +40,25 @@ export class ProductPage {
         this.productImage = page.locator('.fotorama__stage__frame.fotorama__active .fotorama__img');
         this.thumbnailCarousel = page.locator('.fotorama__nav__frame .fotorama__img');
 
-        this.productDescription = page.getByRole('paragraph');
-        this.addToCartButton = page.getByRole('button', { name: /add to cart/i });
-        this.favoriteButton = page.getByRole('button', { name: /favorite/i });
-        this.cartCounter = page.getByRole('status');
-        this.checkoutButton = page.getByRole('link', { name: /checkout/i });
-        this.reviewsSection = page.getByRole('region', { name: /customer reviews/i });
-        this.socialShareButtons = page.getByRole('group', { name: /share/i });
-        this.breadcrumbNavigation = page.getByRole('navigation', { name: /breadcrumbs/i });
-        this.thumbnails = page.getByRole('button', { name: /thumbnail/i });
-        this.skuOrProductId = page.getByRole('paragraph', { name: /sku|product id/i });
-        this.downloadDetails = page.getByRole('region', { name: /download details/i });
-        this.cartPopup = page.getByRole('dialog');
-        this.removeFromCartButton = page.getByRole('button', { name: /remove/i });
-        this.reviewForm = page.getByRole('form', { name: /write a review/i });
-        this.reviewSubmitButton = page.getByRole('button', { name: /submit review/i });
-        this.reviewSortDropdown = page.getByRole('button', { name: /sort by most recent/i });
-        this.downloadButton = page.getByRole('button', { name: /download/i });
+        this.productDescription = page.locator('#single-product-description p').first();
+        this.downloadForFreeButton = page.getByRole('button', { name: /Download for free/i });
+
+        this.favoriteButton = page.getByRole('button', { name: 'Add to favorites' });
+        this.followButton = page.getByRole('button', { name: 'Follow Designer' });
+        this.loginPopup = page.locator('#modal-register');
+        this.cartCounter = page.locator('.cart-counter');
+        this.checkoutButton = page.getByRole('link', { name: 'Checkout' });
+        this.reviewsSection = page.locator('#review-section');
+        // this.pinterestButton = page.getByTitle('Pinterest');
+        this.pinterestButton = page.getByText('Pin', { exact: true });
+        this.breadcrumbNavigation = page.locator('.breadcrumb');
+        this.thumbnails = page.locator('.thumbnail-carousel button');
+        this.downloadDetails = page.locator('.download-details');
+        this.cartPopup = page.locator('.cart-popup');
+        this.removeFromCartButton = page.getByRole('button', { name: 'Remove from cart' });
+        this.reviewForm = page.locator('#review-form');
+        this.reviewSubmitButton = page.getByRole('button', { name: 'Submit review' });
+        this.reviewSortDropdown = page.locator('.review-sort-dropdown');
     }
 
     // Using christmas-tree-lantern-bundle as the default product path for assignment purposes
@@ -77,45 +80,9 @@ export class ProductPage {
         }
     }
 
-    async addToCart() {
-        await this.addToCartButton.click();
-    }
-
-    async addToFavorites() {
-        await this.favoriteButton.click();
-    }
-
-    async getCartCount() {
-        return this.cartCounter.innerText();
-    }
-
     async clickThumbnail(index: number) {
         const thumbnail = this.thumbnailCarousel.nth(index);
         await thumbnail.click();
-    }
-
-    async getProductTitle() {
-        return this.productTitle.innerText();
-    }
-
-    async getProductDescription() {
-        return this.productDescription.innerText();
-    }
-
-    async getProductPrice() {
-        return this.productPrice.innerText();
-    }
-
-    async getSkuOrProductId() {
-        return this.skuOrProductId.innerText();
-    }
-
-    async checkCartPopup() {
-        return this.cartPopup.innerText();
-    }
-
-    async removeFromCart() {
-        await this.removeFromCartButton.click();
     }
 
     async submitReview(text: string) {
@@ -123,15 +90,4 @@ export class ProductPage {
         await this.reviewSubmitButton.click();
     }
 
-    async sortReviewsByMostRecent() {
-        await this.reviewSortDropdown.click();
-    }
-
-    async goToCheckout() {
-        await this.checkoutButton.click();
-    }
-
-    async clickDownloadButton() {
-        await this.downloadButton.click();
-    }
 }

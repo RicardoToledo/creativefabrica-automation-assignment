@@ -16,7 +16,7 @@ export default defineConfig({
         // screenshot: 'on',
         launchOptions: {
           /* Slow down Playwright operations by the specified amount of milliseconds. */
-          // slowMo: 2_000
+          slowMo: 1500
         }
     },
 
