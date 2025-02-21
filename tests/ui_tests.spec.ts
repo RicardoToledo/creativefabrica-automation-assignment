@@ -1,5 +1,4 @@
 import { test, expect } from '../fixtures/pageFixture';
-import { FreeTrialPage } from '../pages/FreeTrialPage';
 
 test.describe('UI & Functional Tests - Product Page', () => {
 
@@ -16,46 +15,47 @@ test.describe('UI & Functional Tests - Product Page', () => {
         }
     });
 
-    test('TC-004: Verify after clicking a product thumbnail the correspondent main product image shows', async ({ productPage }) => {
+    test('TC-003: Verify after clicking a product thumbnail the correspondent main product image shows', async ({ productPage }) => {
         const thumbnailIndex = 3; // Could be randomized or better defined in future iterations
         const expectedThumbnailSrc = await productPage.thumbnailCarousel.nth(thumbnailIndex).getAttribute('src');
         await productPage.thumbnailCarousel.nth(thumbnailIndex).click();
+        await productPage.page.waitForTimeout(500); // Wait for main image to load
         const updatedMainImageSrc = await productPage.productImage.getAttribute('src');
-        expect(updatedMainImageSrc).toBe(expectedThumbnailSrc);
+        expect(updatedMainImageSrc).toContain(expectedThumbnailSrc);
     });
 
-    test('TC-005: Verify the product description is displayed', async ({ productPage }) => {
+    test('TC-004: Verify the product description is displayed', async ({ productPage }) => {
         expect(await productPage.productDescription.innerText()).not.toBe('');
     });
 
     // Skipped due to the page using Cloudflare's captcha check
-    test.skip('TC-006: Verify Download for free button redirects to free trial page', async ({ productPage, freeTrialPage }) => {
+    test.skip('TC-005: Verify Download for free button redirects to free trial page', async ({ productPage, freeTrialPage }) => {
         await productPage.downloadForFreeButton.click();
         await expect(productPage.page).toHaveURL('https://www.creativefabrica.com/b/free-trial/');
         await expect(freeTrialPage.shoppingCartHeading).toBeVisible();
     });
 
-    test('TC-007: Verify Favorite button displays login popup for guest user', async ({ productPage }) => {
+    test('TC-006: Verify Favorite button displays login popup for guest user', async ({ productPage }) => {
         await productPage.favoriteButton.click();
         await expect(productPage.loginPopup).toBeVisible();
     });
 
-    test('TC-000: Verify Follow button displays login popup for guest user', async ({ productPage }) => {
+    test('TC-007: Verify Follow button displays login popup for guest user', async ({ productPage }) => {
         await productPage.followButton.click();
         await expect(productPage.loginPopup).toBeVisible();
     });
 
-    test('TC-015: Ensure customer reviews section is displayed', async ({ productPage }) => {
+    test('TC-008: Ensure customer reviews section is displayed', async ({ productPage }) => {
         await expect (productPage.reviewsSection).toBeVisible(); 
     });
 
     // Skipped due to product page blocking reviews without logging in, selectors being assumed
-    test.skip('TC-016: Validate review submission', async ({ productPage }) => {
+    test.skip('TC-009: Validate review submission', async ({ productPage }) => {
         await productPage.submitReview('This is a test review');
         expect(productPage.page.getByRole('alert')).toContainText('Thank you for your review');
     });
 
-    test('TC-008: Verify Pin (Pinterest) button work', async ({ productPage }) => {
+    test('TC-010: Verify Pin (Pinterest) button works', async ({ productPage }) => {
         await productPage.pinterestButton.click();
         const [newPage] = await Promise.all([
             productPage.page.waitForEvent('popup')

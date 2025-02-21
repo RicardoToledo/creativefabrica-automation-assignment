@@ -64,8 +64,8 @@ export class ProductPage {
     // Using christmas-tree-lantern-bundle as the default product path for assignment purposes
     async navigate(productPath: string = '/product/christmas-tree-lantern-bundle/') {
         await this.page.goto(productPath);
-        await this.dismissCookies();
         await this.dismissNotifications();
+        await this.dismissCookies();
     }
 
     async dismissCookies() {

@@ -1,5 +1,5 @@
 node_modules/
-/test-results/
+test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
@@ -7,3 +7,4 @@ node_modules/
 .DS_Store
 npm-debug.log
 /.github/workflows/playwright-tests.yml
+zerostep.config.json
