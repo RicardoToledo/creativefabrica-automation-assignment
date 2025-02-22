@@ -25,7 +25,7 @@ test.describe('SEO & Accessibility Tests with Updated Lighthouse Integration', (
 
   test.fail('TC-SEO-003: Verify Meta Keywords (if present)', async ({ page }) => {
     await page.goto(URL);
-    expect(page.locator('meta[name="keywords"]')).toHaveAttribute('content');
+    await expect(page.locator('meta[name="keywords"]')).toHaveAttribute('content');
   });
 
   // Needs investigation, fails in headless mode

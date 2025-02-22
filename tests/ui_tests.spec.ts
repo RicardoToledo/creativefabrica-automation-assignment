@@ -3,8 +3,7 @@ import { test, expect } from '../fixtures/pageFixture';
 test.describe('@headed UI & Functional Tests - Product Page', () => {
 
     test('TC-UI-001: Verify product title is displayed correctly', async ({ productPage }) => {
-        const title = await productPage.productTitle.innerText();
-        expect(title).not.toBe('');
+        await expect(productPage.productTitle).not.toBeEmpty();;
     });
 
     test('TC-UI-002: Check if all images are loading properly', async ({ productPage }) => {
@@ -25,7 +24,7 @@ test.describe('@headed UI & Functional Tests - Product Page', () => {
     });
 
     test('TC-UI-004: Verify the product description is displayed', async ({ productPage }) => {
-        expect(await productPage.productDescription.innerText()).not.toBe('');
+        await expect(productPage.productDescription).not.toBeEmpty();;
     });
 
     // Skipped due to the page using Cloudflare's captcha check
@@ -52,7 +51,7 @@ test.describe('@headed UI & Functional Tests - Product Page', () => {
     // Skipped due to product page blocking reviews without logging in, selectors being assumed
     test.skip('TC-UI-009: Validate review submission', async ({ productPage }) => {
         await productPage.submitReview('This is a test review');
-        expect(productPage.page.getByRole('alert')).toContainText('Thank you for your review');
+        await expect(productPage.page.getByRole('alert')).toContainText('Thank you for your review');
     });
 
     test('TC-UI-010: Verify Pin (Pinterest) button works', async ({ productPage }) => {

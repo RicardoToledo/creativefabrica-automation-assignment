@@ -4,8 +4,8 @@ import { test, expect } from '@playwright/test';
 const productid = 'example-product-id';
 const API_URL = `https://www.creativefabrica.com/product/${productid}`;
 
-// Exmaple of API tests, skipped due not proper endpoint ot test
-test.describe.skip('API Tests - Product Data Validation', () => {
+// Exmaple of API tests, skipped due not proper endpoint to test
+test.describe('API Tests - Product Data Validation', () => {
     
     test('TC-API-001: Validate Product API Response', async ({ request }) => {
         const response = await request.get(API_URL);

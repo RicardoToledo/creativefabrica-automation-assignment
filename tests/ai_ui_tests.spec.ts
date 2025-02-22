@@ -2,8 +2,11 @@ import { test } from '@playwright/test'
 import { ai } from '@zerostep/playwright'
 
 test.describe('@headed @chomium AI UI & Functional Tests - Product Page', () => {
+    test.beforeAll(async ({ browserName }) => {
+        test.skip(browserName !== 'chromium', 'Skipping, ZeroStep only works in Chrome');
+    });
 
-    test.skip('TC-AI-001: Verify header and footer are displayed correctly', async ({ page }) => {
+    test('TC-AI-001: Verify header and footer are displayed correctly', async ({ page }) => {
         await page.goto('https://www.creativefabrica.com/product/christmas-tree-lantern-bundle/')
         await ai('Allow notifications', { page, test })
         await ai('Close cookies message', { page, test })

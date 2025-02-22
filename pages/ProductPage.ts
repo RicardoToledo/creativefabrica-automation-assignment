@@ -1,67 +1,49 @@
 import { Page, Locator } from '@playwright/test';
 
 export class ProductPage {
+    // General elements
     readonly page: Page;
     readonly closeCookieButton: Locator;
     readonly closeNotificationButton: Locator;
-    
+    readonly loginPopup: Locator;
+
+    // Product specific elements
     readonly productTitle: Locator;
     readonly productPrice: Locator;
     readonly productImage: Locator;
     readonly thumbnailCarousel: Locator;
-    readonly productDescription: Locator;
     readonly pinterestButton: Locator;
     readonly addToFavoritesButton: Locator;
+    readonly productDescription: Locator;
+
+    // Product page general elements
     readonly followButton: Locator;
     readonly downloadForFreeButton: Locator;
-    
-    readonly allImages: Locator;
-    readonly loginPopup: Locator;
-    
-    readonly thumbnails: Locator;
-    readonly cartCounter: Locator;
-    readonly checkoutButton: Locator;
     readonly reviewsSection: Locator;
-    readonly breadcrumbNavigation: Locator;
-    readonly downloadDetails: Locator;
-    readonly cartPopup: Locator;
-    readonly removeFromCartButton: Locator;
     readonly reviewForm: Locator;
+    readonly allImages: Locator;
     readonly reviewSubmitButton: Locator;
-    readonly reviewSortDropdown: Locator;
-    readonly downloadButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.closeCookieButton = page.locator('#cookie-consent-close');
         this.closeNotificationButton = page.getByRole('button', { name: 'Cancel' });
-        this.allImages = page.locator('img');
+        this.loginPopup = page.locator('#modal-register');
+
         this.productTitle = page.getByRole('heading', { level: 1 });
         this.productPrice = page.getByRole('heading', { level: 2 });
-        
-        // Ugly/bad selectors, could be improved at HTML level
-        this.productImage = page.locator('.fotorama__stage__frame.fotorama__active .fotorama__img');
-        this.thumbnailCarousel = page.locator('.fotorama__nav__frame .fotorama__img');
-
-        this.productDescription = page.locator('#single-product-description p').first();
-        this.downloadForFreeButton = page.getByRole('button', { name: /Download for free/i });
-
-        this.addToFavoritesButton = page.getByRole('button', { name: 'Add to favorites' });
-        this.followButton = page.getByRole('button', { name: 'Follow Designer' });
-        this.loginPopup = page.locator('#modal-register');
-        this.cartCounter = page.locator('.cart-counter');
-        this.checkoutButton = page.getByRole('link', { name: 'Checkout' });
-        this.reviewsSection = page.locator('#review-section');
-
+        this.productImage = page.locator('.fotorama__stage__frame.fotorama__active .fotorama__img'); // UBad selector, could be fixed at HTML level
+        this.thumbnailCarousel = page.locator('.fotorama__nav__frame .fotorama__img'); // Bad selector, could be fixed at HTML level
         this.pinterestButton = page.getByText('Pin', { exact: true });
-        this.breadcrumbNavigation = page.locator('.breadcrumb');
-        this.thumbnails = page.locator('.thumbnail-carousel button');
-        this.downloadDetails = page.locator('.download-details');
-        this.cartPopup = page.locator('.cart-popup');
-        this.removeFromCartButton = page.getByRole('button', { name: 'Remove from cart' });
+        this.addToFavoritesButton = page.getByRole('button', { name: 'Add to favorites' });
+        this.productDescription = page.locator('#single-product-description p').first();
+
+        this.followButton = page.getByRole('button', { name: 'Follow Designer' });
+        this.downloadForFreeButton = page.getByRole('button', { name: /Download for free/i });
+        this.reviewsSection = page.locator('#review-section');
         this.reviewForm = page.locator('#review-form');
         this.reviewSubmitButton = page.getByRole('button', { name: 'Submit review' });
-        this.reviewSortDropdown = page.locator('.review-sort-dropdown');
+        this.allImages = page.locator('img');
     }
 
     // Using christmas-tree-lantern-bundle as the default product path for assignment purposes
