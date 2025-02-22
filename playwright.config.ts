@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
+    timeout: 30000,
     testDir: './tests',
     /* Run tests in files in parallel */
     fullyParallel: true,
@@ -8,8 +9,9 @@ export default defineConfig({
     forbidOnly: !!process.env.CI,
     /* Retry failed tests 2 times on CI, 1 time locally */
     retries: process.env.CI ? 2 : 1,
-    /* Opt out of parallel tests on CI. */
-    workers: process.env.CI ? 1 : undefined,
+    /* Opt out of parallel tests on CI, default is 3. */
+    workers: 1,
+    // workers: process.env.CI ? 1 : 3,
     reporter: [
         ['list'],
         ['html', { outputFolder: 'test-results' }]
@@ -17,7 +19,9 @@ export default defineConfig({
     use: {
         /* Base URL to use in actions like `await page.goto('/')`. */
         baseURL: 'https://www.creativefabrica.com',
-        headless: true,
+        headless: false,
+        viewport: { width: 1280, height: 720 },
+        ignoreHTTPSErrors: true,
         // trace: 'on',
         // video: 'on',
         // screenshot: 'on',
@@ -31,7 +35,7 @@ export default defineConfig({
     projects: [
       {
         name: 'chromium',
-        use: { ...devices['Desktop Chrome'] },
+        use: { browserName: 'chromium', },
       },
       {
         name: 'firefox',
@@ -46,10 +50,6 @@ export default defineConfig({
       {
         name: 'Mobile Chrome',
         use: { ...devices['Pixel 5'] },
-      },
-      {
-        name: 'Mobile Safari',
-        use: { ...devices['iPhone 12'] },
       },
   
       /* Test against branded browsers. */

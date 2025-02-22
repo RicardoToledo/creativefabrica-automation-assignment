@@ -4,22 +4,25 @@ export class ProductPage {
     readonly page: Page;
     readonly closeCookieButton: Locator;
     readonly closeNotificationButton: Locator;
-    readonly allImages: Locator;
+    
     readonly productTitle: Locator;
     readonly productPrice: Locator;
     readonly productImage: Locator;
     readonly thumbnailCarousel: Locator;
     readonly productDescription: Locator;
-    readonly downloadForFreeButton: Locator;
-    readonly favoriteButton: Locator;
+    readonly pinterestButton: Locator;
+    readonly addToFavoritesButton: Locator;
     readonly followButton: Locator;
+    readonly downloadForFreeButton: Locator;
+    
+    readonly allImages: Locator;
     readonly loginPopup: Locator;
+    
+    readonly thumbnails: Locator;
     readonly cartCounter: Locator;
     readonly checkoutButton: Locator;
     readonly reviewsSection: Locator;
-    readonly pinterestButton: Locator;
     readonly breadcrumbNavigation: Locator;
-    readonly thumbnails: Locator;
     readonly downloadDetails: Locator;
     readonly cartPopup: Locator;
     readonly removeFromCartButton: Locator;
@@ -43,13 +46,13 @@ export class ProductPage {
         this.productDescription = page.locator('#single-product-description p').first();
         this.downloadForFreeButton = page.getByRole('button', { name: /Download for free/i });
 
-        this.favoriteButton = page.getByRole('button', { name: 'Add to favorites' });
+        this.addToFavoritesButton = page.getByRole('button', { name: 'Add to favorites' });
         this.followButton = page.getByRole('button', { name: 'Follow Designer' });
         this.loginPopup = page.locator('#modal-register');
         this.cartCounter = page.locator('.cart-counter');
         this.checkoutButton = page.getByRole('link', { name: 'Checkout' });
         this.reviewsSection = page.locator('#review-section');
-        // this.pinterestButton = page.getByTitle('Pinterest');
+
         this.pinterestButton = page.getByText('Pin', { exact: true });
         this.breadcrumbNavigation = page.locator('.breadcrumb');
         this.thumbnails = page.locator('.thumbnail-carousel button');

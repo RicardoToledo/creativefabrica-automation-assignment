@@ -8,3 +8,4 @@ test-results/
 npm-debug.log
 /.github/workflows/playwright-tests.yml
 zerostep.config.json
+lighthouse-performance-report.json
