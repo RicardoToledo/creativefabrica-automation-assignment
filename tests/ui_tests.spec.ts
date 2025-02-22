@@ -1,6 +1,6 @@
 import { test, expect } from '../fixtures/pageFixture';
 
-test.describe('@headed UI & Functional Tests - Product Page', () => {
+test.describe('UI & Functional Tests - Product Page', () => {
 
     test('TC-UI-001: Verify product title is displayed correctly', async ({ productPage }) => {
         await expect(productPage.productTitle).not.toBeEmpty();;
