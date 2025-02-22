@@ -28,7 +28,7 @@ export class ProductPage {
         this.page = page;
         this.closeCookieButton = page.locator('#cookie-consent-close');
         this.closeNotificationButton = page.getByRole('button', { name: 'Cancel' });
-        this.loginPopup = page.locator('#modal-register');
+        this.loginPopup = page.locator('#modal-register', { hasText: 'Create a free account' });
 
         this.productTitle = page.getByRole('heading', { level: 1 });
         this.productPrice = page.getByRole('heading', { level: 2 });
