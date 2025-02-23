@@ -152,7 +152,12 @@ Use the following npm scripts to run the tests:
 
 #### Running the tests without npm scripts
 
-> To run the test suite with different settings or to specify tests without using npm scripts, please refer to the Playwright's [Running and debugging tests](https://playwright.dev/docs/running-tests) documentation.
+> To run the test suite with different settings, please refer to the Playwright's [Running and debugging tests](https://playwright.dev/docs/running-tests) documentation.
+
+<h4 align="left">UI tests running on Creative Fabrica website</h4>
+<p align="left">
+   <img width="650" alt="UI tests running on Creative Fabrica website" src="https://github.com/user-attachments/assets/184fb7c2-5fff-4df9-9ef2-5638d389b926">
+</p>
 
 ## CI with GitHub Actions
 
